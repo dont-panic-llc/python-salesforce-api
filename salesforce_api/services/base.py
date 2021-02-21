@@ -49,6 +49,7 @@ class RestService(_Service):
                 'Accept': 'application/json',
                 'Content-type': 'application/json'
             }
+        kwargs['body'] = kwargs['body'].encode('utf-8')
         return self._parse_response(self.request(verb, **kwargs))
 
     def _response_is_json(self, response):
@@ -90,13 +91,13 @@ class RestService(_Service):
         return self._request(VERB.GET, uri=uri, params=params)
 
     def _post(self, uri: str = None, json: dict = None):
-        return self._request(VERB.POST, uri=uri, json=json.encode('utf-8'))
+        return self._request(VERB.POST, uri=uri, json=json)
 
     def _put(self, uri: str = None, json: dict = None, data: str = None, **kwargs):
-        return self._request(VERB.PUT, uri=uri, json=json.encode('utf-8'), data=data.encode('utf-8'), **kwargs)
+        return self._request(VERB.PUT, uri=uri, json=json, data=data, **kwargs)
 
     def _patch(self, uri: str = None, json: dict = None, data: str = None):
-        return self._request(VERB.PATCH, uri=uri, json=json.encode('utf-8'), data=data.encode('utf-8'))
+        return self._request(VERB.PATCH, uri=uri, json=json, data=data)
 
     def _delete(self, uri: str = None):
         return self._request(VERB.DELETE, uri=uri)
