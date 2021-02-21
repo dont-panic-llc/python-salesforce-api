@@ -90,13 +90,13 @@ class RestService(_Service):
         return self._request(VERB.GET, uri=uri, params=params)
 
     def _post(self, uri: str = None, json: dict = None):
-        return self._request(VERB.POST, uri=uri, json=json)
+        return self._request(VERB.POST, uri=uri, json=json.encode('utf-8'))
 
     def _put(self, uri: str = None, json: dict = None, data: str = None, **kwargs):
-        return self._request(VERB.PUT, uri=uri, json=json, data=data.encode('utf-8'), **kwargs)
+        return self._request(VERB.PUT, uri=uri, json=json.encode('utf-8'), data=data.encode('utf-8'), **kwargs)
 
     def _patch(self, uri: str = None, json: dict = None, data: str = None):
-        return self._request(VERB.PATCH, uri=uri, json=json, data=data.encode('utf-8'))
+        return self._request(VERB.PATCH, uri=uri, json=json.encode('utf-8'), data=data.encode('utf-8'))
 
     def _delete(self, uri: str = None):
         return self._request(VERB.DELETE, uri=uri)
